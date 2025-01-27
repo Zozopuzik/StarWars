@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -66,6 +60,6 @@ const styles = StyleSheet.create({
   arrowContainer: {
     width: wp('10%'),
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 });

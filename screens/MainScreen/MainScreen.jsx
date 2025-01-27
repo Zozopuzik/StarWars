@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator, // Импортируем лоадер
-} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -24,7 +17,7 @@ export default function MainScreen() {
   const {setHeroes, setFavHeroes} = useHeroesStore();
   const {currentPageLink, setPrevPageLink, setNextPageLink} =
     useHerosPageStore();
-  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -51,7 +44,7 @@ export default function MainScreen() {
     await favoriteHeroesAsyncStorage.clearStore();
     const newHeroes = await favoriteHeroesAsyncStorage.getHeroes();
     setFavHeroes(newHeroes);
-   };
+  };
 
   return (
     <View style={styles.container}>
@@ -59,7 +52,7 @@ export default function MainScreen() {
 
       {isLoading ? (
         <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#000" />
         </View>
       ) : (
         <>
@@ -67,7 +60,6 @@ export default function MainScreen() {
         </>
       )}
       <HeroesPageChanger />
-
     </View>
   );
 }

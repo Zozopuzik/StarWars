@@ -1,6 +1,6 @@
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,17 +13,17 @@ import HeroFilms from '../../components/HeroFilms/HeroFilms';
 export default function CharacterScreen() {
   const route = useRoute();
   const navigation = useNavigation();
-  const { link, title } = route.params;
+  const {link, title} = route.params;
   const [heroData, setHeroData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (title) {
       navigation.setOptions({
-        title: title,  
+        title: title,
       });
     }
-  }, [title, navigation]); 
+  }, [title, navigation]);
 
   useEffect(() => {
     (async () => {
@@ -32,16 +32,15 @@ export default function CharacterScreen() {
         setHeroData(data);
       } catch (error) {
         console.error(error);
-        // You can also handle errors here (e.g., set an error state)
       } finally {
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       }
     })();
   }, [link]);
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <ActivityIndicator size="large" color="#000" />
       </View>
     );
@@ -50,21 +49,21 @@ export default function CharacterScreen() {
   return (
     <View>
       <View style={styles.row}>
-      {heroData && <HeroDescription heroData={heroData} />}
-      {heroData && <PlanetCard heroData={heroData} />}
+        {heroData && <HeroDescription heroData={heroData} />}
+        {heroData && <PlanetCard heroData={heroData} />}
       </View>
       <View style={styles.row}>
-        <HeroFilms heroData={heroData}/>
+        <HeroFilms heroData={heroData} />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
- row: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  marginTop: hp('2%')
- }
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: hp('2%'),
+  },
 });

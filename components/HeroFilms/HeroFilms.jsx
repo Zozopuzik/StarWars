@@ -1,15 +1,15 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import api from '../../api/api'; // Make sure this import exists
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import api from '../../api/api';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import FilmCard from '../FilmCard/FilmCard';
 
-export default function HeroFilms({ heroData }) {
+export default function HeroFilms({heroData}) {
   const [films, setFilms] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state to show ActivityIndicator
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (heroData && heroData.films) {
@@ -18,19 +18,19 @@ export default function HeroFilms({ heroData }) {
           const heroFilms = [];
           for (let element of heroData.films) {
             const response = await api.getData(element);
-            heroFilms.push(response.title); // Assuming you want the title of each film
+            heroFilms.push(response.title);
           }
           setFilms(heroFilms);
         } catch (error) {
-          console.error("Error fetching films:", error);
+          console.error('Error fetching films:', error);
         } finally {
-          setLoading(false); // Stop loading after fetching films
+          setLoading(false);
         }
       };
 
       fetchFilms();
     }
-  }, [heroData]); // Dependency array includes heroData to fetch films when heroData changes
+  }, [heroData]);
 
   if (loading) {
     return (
@@ -44,7 +44,9 @@ export default function HeroFilms({ heroData }) {
     <View style={styles.container}>
       <Text style={styles.heading}>Films:</Text>
       <View style={styles.row}>
-        {films.map((element, index) => <FilmCard name={element} key={index}/>)}
+        {films.map((element, index) => (
+          <FilmCard name={element} key={index} />
+        ))}
       </View>
     </View>
   );
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 2,
     alignItems: 'center',
-    paddingVertical: hp('2%')
+    paddingVertical: hp('2%'),
   },
   row: {
     width: '96%',
@@ -70,12 +72,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    gap: hp('2%')
+    gap: hp('2%'),
   },
   heading: {
     fontWeight: '600',
     fontSize: hp('2.3%'),
-    marginBottom: hp('1%')
-
-  }
+    marginBottom: hp('1%'),
+  },
 });

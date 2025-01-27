@@ -1,12 +1,12 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import api from '../../api/api'; // Make sure this import exists
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import api from '../../api/api';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export default function PlanetCard({ heroData }) {
+export default function PlanetCard({heroData}) {
   const [planetData, setPlanetData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,13 +17,13 @@ export default function PlanetCard({ heroData }) {
           const data = await api.getData(heroData.homeworld);
           setPlanetData(data);
         } catch (error) {
-          console.error("Error fetching planet data:", error);
+          console.error('Error fetching planet data:', error);
         } finally {
           setLoading(false);
         }
       })();
     }
-  }, [heroData]); 
+  }, [heroData]);
 
   if (loading) {
     return (
@@ -42,7 +42,7 @@ export default function PlanetCard({ heroData }) {
           <Text>Climate: {planetData.climate}</Text>
           <Text>Gravity: {planetData.gravity}</Text>
           <Text>Terrain: {planetData.terrain}</Text>
-          <Text>Population: {planetData.population}</Text> 
+          <Text>Population: {planetData.population}</Text>
         </>
       ) : (
         <Text>No planet data available</Text>
@@ -57,17 +57,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  container : {
+  container: {
     width: wp('40%'),
     height: hp('25%'),
     borderRadius: 5,
     borderColor: '#000',
     borderWidth: 2,
     paddingLeft: wp('2%'),
-
   },
   title: {
-      fontWeight: '600',
-      fontSize: hp('2.3%')
-  }
+    fontWeight: '600',
+    fontSize: hp('2.3%'),
+  },
 });
